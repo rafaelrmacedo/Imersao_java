@@ -24,6 +24,14 @@ public class App {
 
         // Exibir e manipular os dados
 
-         
+        for (Map<String,String> filme : listaDeFilmes) { // lista para selecionar apenas o que quero
+            System.out.printf("Título:", filme.get("title"));
+            System.out.println();
+            System.out.printf("Poster: ", filme.get("image"));
+            System.out.println();
+            System.out.printf("Classificação: ", filme.get("imDbRating"));
+            System.out.println();
+        }
+
     }
 }
