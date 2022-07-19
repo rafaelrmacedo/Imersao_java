@@ -17,6 +17,7 @@ public class App {
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         String body = response.body();
         System.out.println(body);
+        
 
         // Pegar apenas os dados que interessam (título, poster, rating)
         var parser = new JsonParser();
@@ -25,11 +26,19 @@ public class App {
         // Exibir e manipular os dados
 
         for (Map<String,String> filme : listaDeFilmes) { // lista para selecionar apenas o que quero
-            System.out.printf("Título:", filme.get("title"));
+            System.out.printf("\u001b[1m Título: \u001b[0m %s", filme.get("title")); // \u001b[0m esse tipo de código serve para decorar o terminal
             System.out.println();
-            System.out.printf("Poster: ", filme.get("image"));
+            System.out.printf("\u001b[1m Poster: \u001b[0m %s", filme.get("image"));
             System.out.println();
-            System.out.printf("Classificação: ", filme.get("imDbRating"));
+            System.out.printf("\u001b[44m \u001b[1m Classificação: \u001b[0m \u001b[0m %s", filme.get("imDbRating"));
+
+            int i;
+            float imDbRating = Float.parseFloat(filme.get("imDbRating"));
+
+                for (i = 0; i < imDbRating; i++){ //adição de estrelas de classificação
+                    System.out.print("\u2B50"); // emoji da estrela \u2B50
+                }
+            System.out.println();
             System.out.println();
         }
 
