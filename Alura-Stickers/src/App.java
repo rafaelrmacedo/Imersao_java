@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -10,10 +12,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         
         // Fazer uma conexão HTTP e buscar os 250 filmes
-        String url = "https://mocki.io/v1/9a7c1ca9-29b4-4eb3-8306-1adb9d159060";
+        String url = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
         URI address = URI.create(url);
         var client = HttpClient.newHttpClient(); // podemos colocar var no lugar de HttClient, o java ja identifica
-        HttpRequest request = HttpRequest.newBuilder(address).GET().build();
+        var request = HttpRequest.newBuilder(address).GET().build();
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
         String body = response.body();
         System.out.println(body);
@@ -24,8 +26,22 @@ public class App {
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
 
         // Exibir e manipular os dados
+        var geradora = new gerador();
 
         for (Map<String,String> filme : listaDeFilmes) { // lista para selecionar apenas o que quero
+
+            // criação dos stickers
+            String titulo = filme.get("title");
+            String urlImage = filme.get("image");
+
+            InputStream inputStream = new URL (urlImage).openStream();
+            String Filename = titulo + ".png";
+
+            geradora.cria(inputStream, Filename);
+
+            // parte de classificação no terminal
+
+            System.out.println();
             System.out.printf("\u001b[1m Título: \u001b[0m %s", filme.get("title")); // \u001b[0m esse tipo de código serve para decorar o terminal
             System.out.println();
             System.out.printf("\u001b[1m Poster: \u001b[0m %s", filme.get("image"));
