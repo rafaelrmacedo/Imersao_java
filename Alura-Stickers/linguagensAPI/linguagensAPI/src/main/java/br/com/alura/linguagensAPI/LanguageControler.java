@@ -28,4 +28,10 @@ public class LanguageControler {
         Language saveLanguage = repository.save(language);
         return saveLanguage;
     }
+    @PutMapping("/languages/{id}")
+    public Language updateLanguage(@RequestBody Language language, @PatchVariable String id){
+        Language currentLanguage = repository.findById(id).get();
+        BeanUtils.copyProperties(language, currentLanguage, "id");
+        return repository.save(currentLanguage);
+    }
 }
