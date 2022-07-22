@@ -10,8 +10,11 @@ public class App {
         //----------------------------Link da API do IMDB--------------------------------
         //String APIurl = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
 
-        String APIurl = "https://api.nasa.gov/planetary/apod?api_key=3WWIXgnZQTfWH6ax8ORltuWNr0ullwJ1areMBXGm&start_date=2022-07-12&end_date=2022-07-19";
-        ContentExtractor extractor = new NasaContentExtractor();
+        //String APIurl = "https://api.nasa.gov/planetary/apod?api_key=3WWIXgnZQTfWH6ax8ORltuWNr0ullwJ1areMBXGm&start_date=2022-07-12&end_date=2022-07-19";
+        //ContentExtractor extractor = new NasaContentExtractor();
+
+        String APIurl = "http://localhost:8080/languages";
+        ContentExtractor extractor = new IMDBcontentExtractor();
         
         var http = new HTTPclient();
         String json = http.dataSearch(APIurl);
@@ -25,7 +28,7 @@ public class App {
 
         for (int i = 0; i < 3; i++){
 
-            Content content = contents.get(i); // lista para selecionar apenas o que quero
+            Content content = contents.get(i); // lista para selecionar apenas o que quero 
     
                 InputStream inputStream = new URL (content.getUrlImage()).openStream();
                 String Filename = content.getTitle() + ".png";
