@@ -16,3 +16,7 @@ Aprendemos a refatorar o nosso código, e programamos usando diretamente orienta
 Aula 4 - 21/07
 
 Criamos nossa própria API, utilizamos o banco de dados MongoDB para o armazenamento do JSON da nossa API, e usamos a API para criar as figurinhas.
+
+Aula 5 - 22/07 
+
+Colocamos a nossa aplicação na nuvem (Heroku)
